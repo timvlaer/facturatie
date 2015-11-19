@@ -1,0 +1,16 @@
+<h2>Klanten</h2>
+
+<div class="form-group">
+  <label class="sr-only" for="filterClient">Zoek klant</label>
+  <div class="input-group">
+    <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
+    <input type="text" class="form-control" id="filterClient" placeholder="Zoek een klant" (keyUp)="filterClient($event)">
+  </div>
+</div>
+
+<div class="list-group">
+  <a class="list-group-item" *ng-for="#client of filteredClientList"
+     [ng-class]="{active: client == selectedClient}" (click)="selectClient(client)" ><!--TODO router-link="client/{{client.id}}"-->
+    {{ client.name }}
+  </a>
+</div>
