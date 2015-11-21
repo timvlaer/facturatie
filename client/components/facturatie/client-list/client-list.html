@@ -1,5 +1,3 @@
-<h2>Klanten</h2>
-
 <div class="form-group">
   <label class="sr-only" for="filterClient">Zoek klant</label>
   <div class="input-group">
@@ -11,6 +9,7 @@
 <div class="list-group">
   <a class="list-group-item" *ng-for="#client of filteredClientList"
      [ng-class]="{active: client == selectedClient}" (click)="selectClient(client)" ><!--TODO router-link="client/{{client.id}}"-->
+    <!--<span class="badge"><span class="glyphicon glyphicon-edit"></span></span>-->
     {{ client.name }}
   </a>
 </div>

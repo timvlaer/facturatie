@@ -1,8 +1,79 @@
 <div id="page">
 
+  <div class="no-document" *ng-if="!client">
+    <div class="jumbotron">
+      <ol>
+        <li>Selecteer een klant</li>
+        <li>Maak een nieuw document aan</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="document" *ng-if="client">
+
+  <nav class="navbar navbar-default">
+    <div class="container-fluid">
+      <span class="navbar-text">Factuur <span>voor {{client.name}}</span></span>
+      <div class="collapse navbar-collapse">
+        <div class="nav navbar-nav navbar-right">
+          <button type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-download-alt"></span> Download</button>
+          <button type="button" class="btn btn-default navbar-btn"><span class="glyphicon glyphicon-print"></span> Print</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <div class="client" *ng-if="client">
-    {{client?.name}}
-    {{client?.address}}
+    <span class="name">{{client?.name}}</span>
+    <span class="address">{{client?.address}}</span>
+    <span class="address2">{{client?.postcode}} {{client?.address}}</span>
+    <span class="btw">{{client?.btwnr}}</span>
+  </div>
+
+  <div id="document-body">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Artikel</th>
+        <th>Aantal</th>
+        <th>Eenheidsprijs</th>
+        <th>BTW</th>
+        <th>Korting</th>
+        <th>Totaal (excl.)</th>
+        <th>Totaal (incl.)</th>
+        <th>Bestelbonref.</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <!--<tr class="line" *ng-for="#line of document.lines">
+        <td>{{line.article}}</td>
+        <td>{{line.quantity}}</td>
+        <td>{{line.price}}</td>
+        <td>{{line.VAT}}</td>
+        <td>{{line.discount}}</td>
+        <td>{{line.exclTotal}}</td>
+        <td>{{line.inclTotal}}</td>
+        <td>{{line.ref}}</td>
+        <td></td>
+      </tr>-->
+      <tr class="line">
+        <td><input type="text" class="form-control input-sm" placeholder="Omschrijving" /></td>
+        <td><input type="text" class="form-control input-sm" placeholder="Aantal" size="4" /></td>
+        <td><input type="text" class="form-control input-sm" placeholder="Prijs" size="6" /></td>
+        <td><select class="form-control input-sm"><option>21%</option><option>6%</option></select></td>
+        <td><input type="text" class="form-control input-sm" placeholder="Korting" size="3" /></td>
+        <td><input type="text" class="form-control input-sm" placeholder="Totaal" size="5" /></td>
+        <td><input type="text" class="form-control input-sm" placeholder="Totaal" size="5" /></td>
+        <td><input type="text" class="form-control input-sm" placeholder="Ref." /></td>
+        <td><button class="btn btn-default btn-sm"><span class="glyphicon glyphicon-remove"></span></button></td>
+      </tr>
+
+      </tbody>
+    </table>
+
+  </div>
+
   </div>
 
 

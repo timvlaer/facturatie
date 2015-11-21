@@ -1,40 +1,40 @@
-import {Component, Output, CORE_DIRECTIVES, EventEmitter} from 'angular2/angular2';
+import {Component, Input, Output, CORE_DIRECTIVES, EventEmitter} from 'angular2/angular2';
 import {RouterLink} from 'angular2/router';
+
+import {Client} from '../../../domain/Client';
+
+import {ClientService} from '../../../services/ClientService'
 
 @Component({
   selector: 'client-list',
   templateUrl: './components/facturatie/client-list/client-list.html',
+  styleUrls: ['./components/facturatie/client-list/client-list.css'],
   directives: [CORE_DIRECTIVES, RouterLink]
 })
 export class ClientListCmp {
-
   @Output() select:EventEmitter = new EventEmitter();
 
-  clients = [
-    {id: 1, name: 'Van Laer'},
-    {id: 2, name: 'Coca-cola'},
-    {id: 3, name: 'Arag Verzekeringen'},
-    {id: 4, name: 'Smekens'},
-    {id: 5, name: 'Janssens'},
-    {id: 6, name: 'Broeckx'},
-    {id: 7, name: 'Google'}
-  ];
+  clients:Client[] = [];
+  filteredClientList:Client[] = this.clients;
 
-  selectedClient = null;
+  selectedClient:Client = null;
 
-  filteredClientList = this.clients;
+  constructor(clientService:ClientService) {
+    this.clients = clientService.getClients();
+    //clientService.subscribe((clients:Client[]) => this.clients = clients);
+  }
 
-  selectClient = function(client) {
+  selectClient = function(client:Client) {
     this.selectedClient = client;
     if(client) {
       this.select.next(client);
     }
   };
 
-  filterClient = function(event:KeyboardEvent) {
+  filterClient = function(event:any) {
     if(event && event.target && event.target.value) {
       let filterValue = event.target.value.toLowerCase();
-      this.filteredClientList = this.clients.filter(client => client.name.toLowerCase().indexOf(filterValue) >= 0);
+      this.filteredClientList = this.clients.filter((client:Client) => client.name && client.name.toLowerCase().indexOf(filterValue) >= 0);
       if(this.filteredClientList.length == 1) {
         this.selectClient(this.filteredClientList[0]);
       }

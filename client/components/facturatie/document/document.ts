@@ -1,5 +1,7 @@
 import {Component, Input, CORE_DIRECTIVES} from 'angular2/angular2';
 
+import {Client} from '../../../domain/Client';
+
 @Component({
   selector: 'document',
   templateUrl: './components/facturatie/document/document.html',
@@ -7,6 +9,7 @@ import {Component, Input, CORE_DIRECTIVES} from 'angular2/angular2';
 })
 export class DocumentCmp {
 
-  @Input() client;
+  @Input() client:Client;
+  //@Input() document = { lines: [] };
 
 }

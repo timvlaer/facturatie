@@ -3,15 +3,20 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-3">
-        <client-list (select)="selectClient($event)"></client-list>
+      <h2>Klanten</h2>
+      <client-list (select)="selectClient($event)"></client-list>
+      <button class="btn btn-primary" (click)="createNewClient()">Nieuwe klant maken</button>
+      <button class="btn btn-default" (click)="editSelectedClient()" [class.hidden]="!selectedClient">Klantgegevens bewerken</button>
     </div>
-    <div class="col-lg-3">
+    <div class="col-lg-5" *ng-if="editClient">
+      <client-form [client]="editClient"></client-form><!-- (saveClient)="" (removeClient)="" (cancel)=""-->
+    </div>
+    <div class="col-lg-3" *ng-if="!editClient">
         <h2>Documenten</h2>
       <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Nieuw Factuur</button>
       <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Nieuwe Verzendnota</button>
     </div>
-    <div class="col-lg-6">
-      <h2>Document</h2>
+    <div class="col-lg-6" *ng-if="!editClient">
       <document [client]="selectedClient"></document>
     </div>
   </div>
