@@ -14,14 +14,17 @@ import {ClientService} from '../../../services/ClientService'
 export class ClientListCmp {
   @Output() select:EventEmitter = new EventEmitter();
 
-  clients:Client[] = [];
+  clientService:ClientService;
+
+  clients:Client[];
   filteredClientList:Client[] = this.clients;
 
   selectedClient:Client = null;
 
   constructor(clientService:ClientService) {
-    this.clients = clientService.getClients();
-    //clientService.subscribe((clients:Client[]) => this.clients = clients);
+    this.clientService = clientService;
+    this.clients = this.clientService.getClients();
+    this.filteredClientList = this.clients;
   }
 
   selectClient = function(client:Client) {

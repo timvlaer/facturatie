@@ -1,6 +1,6 @@
 <h1>Klantgegevens <em>{{client.name ? client.name : 'nieuwe klant'}}</em></h1>
 
-<form class="form-horizontal">
+<form class="form-horizontal" (ng-submit)="save()">
   <div class="form-group">
     <label for="inputName" class="col-sm-2 control-label">Naam</label>
     <div class="col-sm-10">
@@ -38,8 +38,8 @@
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
-      <button type="submit" class="btn btn-primary" (click)="save()">Klantgegevens opslaan</button>
-      <button class="btn btn-default pull-right" (click)="cancel.next()">Annuleer</button>
+      <button type="submit" class="btn btn-primary">Klantgegevens opslaan</button>
+      <button class="btn btn-default pull-right" (click)="cancel()">Annuleer</button>
     </div>
   </div>
 

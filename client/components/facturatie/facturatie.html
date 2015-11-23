@@ -9,7 +9,7 @@
       <button class="btn btn-default" (click)="editSelectedClient()" [class.hidden]="!selectedClient">Klantgegevens bewerken</button>
     </div>
     <div class="col-lg-5" *ng-if="editClient">
-      <client-form [client]="editClient"></client-form><!-- (saveClient)="" (removeClient)="" (cancel)=""-->
+      <client-form [client]="editClient" (saveClient)="clientSaved($event)"></client-form><!-- (saveClient)="" (removeClient)="" (cancel)=""-->
     </div>
     <div class="col-lg-3" *ng-if="!editClient">
         <h2>Documenten</h2>

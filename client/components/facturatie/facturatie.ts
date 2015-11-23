@@ -29,12 +29,17 @@ export class FacturatieCmp {
     this.selectedClient = client;
   };
 
-  createNewClient = function() {
-      this.editClient = this.clientService.createNewClient();
+  createNewClient = function () {
+    this.editClient = this.clientService.createNewClient();
   };
 
-  editSelectedClient = function() {
-      this.editClient = this.selectedClient;
-  }
+  editSelectedClient = function () {
+    this.editClient = this.selectedClient;
+  };
+
+  clientSaved = function (client:Client) {
+    console.log("bla");
+    delete this.editClient;
+  };
 
 }
