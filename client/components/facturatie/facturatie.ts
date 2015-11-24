@@ -16,8 +16,9 @@ import {DocumentCmp} from '../facturatie/document/document';
 })
 export class FacturatieCmp {
 
+  clientEditMode:boolean = false;
+
   selectedClient:Client;
-  editClient:Client;
 
   clientService:ClientService;
 
@@ -30,16 +31,16 @@ export class FacturatieCmp {
   };
 
   createNewClient = function () {
-    this.editClient = this.clientService.createNewClient();
+    this.selectedClient = this.clientService.createNewClient();
+    this.clientEditMode = true;
   };
 
   editSelectedClient = function () {
-    this.editClient = this.selectedClient;
+    this.clientEditMode = true;
   };
 
-  clientSaved = function (client:Client) {
-    console.log("bla");
-    delete this.editClient;
+  clientEditingDone = function (client:Client) {
+    this.clientEditMode = false;
   };
 
 }

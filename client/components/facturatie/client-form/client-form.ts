@@ -15,26 +15,29 @@ export class ClientFormCmp {
 
   clientService:ClientService;
 
-  @Output() saveClient = new EventEmitter();
-  /*@Output() removeClient:EventEmitter;
-  @Output() cancel:EventEmitter; */
+  @Output() done = new EventEmitter();
 
   constructor(clientService:ClientService) {
     this.clientService = clientService;
   }
 
-  save = function() {
+  emitDoneEvent = function() {
+    this.done.next(this.client);
+  };
+
+  saveClient = function() {
     this.clientService.saveClient(this.client);
-    this.saveClient.next(this.client);
   };
 
   cancel = function() {
-
+    this.clientService.rollbackClient(this.client);
   };
 
   remove = function() {
-    this.removeClient.next(this.client);
+    this.clientService.removeClient(this.client);
   };
+
+
 
 
 

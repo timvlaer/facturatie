@@ -2,20 +2,15 @@ import {Injectable} from 'angular2/angular2';
 
 import {Client} from '../domain/Client';
 
-//import {SortedArraySet} from 'collections/sorted-array-set';
-
 @Injectable()
 export class ClientService {
   STORAGE_KEY = "clients";
 
   clients: Client[] = [];
-  //clients: SortedArraySet = new SortedArraySet([], (a,b) => a.name == b.name, (a,b) => a.localeCompare(b));
   listeners:Function[] = [];
 
   constructor() {
-    if(localStorage.getItem(this.STORAGE_KEY)) {
-      this.clients = JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || [];
-    }
+   this._load();
   }
 
   getClients = function() {
@@ -24,6 +19,7 @@ export class ClientService {
 
   createNewClient = function():Client {
     var client = new Client();
+    client.name = " ";
     this.clients.push(client);
     return client;
   };
@@ -35,6 +31,25 @@ export class ClientService {
     } else {
       //update client?
     }
+    this._store();
+  };
+
+  removeClient = function(client:Client) {
+    this.clients = this.clients.splice(this.clients.indexOf(client), 1);
+    this._store();
+  };
+
+  rollbackClient = function(client:Client) {
+     this._load();
+  };
+
+  _store = function () {
     localStorage.setItem(this.STORAGE_KEY, JSON.stringify(this.clients));
+  };
+
+  _load = function () {
+    if (localStorage.getItem(this.STORAGE_KEY)) {
+      this.clients = JSON.parse(localStorage.getItem(this.STORAGE_KEY)) || [];
+    }
   };
 }

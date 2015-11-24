@@ -8,15 +8,15 @@
       <button class="btn btn-primary" (click)="createNewClient()">Nieuwe klant maken</button>
       <button class="btn btn-default" (click)="editSelectedClient()" [class.hidden]="!selectedClient">Klantgegevens bewerken</button>
     </div>
-    <div class="col-lg-5" *ng-if="editClient">
-      <client-form [client]="editClient" (saveClient)="clientSaved($event)"></client-form><!-- (saveClient)="" (removeClient)="" (cancel)=""-->
+    <div class="col-lg-5" *ng-if="clientEditMode">
+      <client-form [client]="selectedClient" (done)="clientEditingDone($event)"></client-form>
     </div>
-    <div class="col-lg-3" *ng-if="!editClient">
+    <div class="col-lg-3" *ng-if="!clientEditMode">
         <h2>Documenten</h2>
       <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Nieuw Factuur</button>
       <button class="btn btn-default"><span class="glyphicon glyphicon-plus"></span> Nieuwe Verzendnota</button>
     </div>
-    <div class="col-lg-6" *ng-if="!editClient">
+    <div class="col-lg-6" *ng-if="!clientEditMode">
       <document [client]="selectedClient"></document>
     </div>
   </div>
